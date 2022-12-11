@@ -36,7 +36,7 @@ class SinglyLinkedList {
       this.length = 0;
       return this.head;
     }
-		*/
+    */
 
     let currentNode = this.head;
     let previousNode = currentNode;
@@ -115,15 +115,38 @@ class SinglyLinkedList {
     this.length++;
     return true;
   }
+
+  remove(index) {
+    if (index < 0 || index >= this.length) return undefined;
+
+    if (index === this.length - 1) return this.pop()
+
+    if (index === 0) return this.shift();
+
+    let node = this.get(index - 1);
+    let nodeToDelete = node.next;
+    node.next = nodeToDelete.next;
+
+    return nodeToDelete
+
+  }
+  reverse() {
+    if (!this.head) return undefined;
+
+    let current = this.head;
+    this.head = this.tail;
+    this.tail = current;
+    let prev = null;
+    let nextNode;
+    while (current) {
+      nextNode = current.next;
+      current.next = prev;
+      prev = current;
+
+      current = current.next;
+    }
+
+    return this;
+  }
 }
 
-const list = new SinglyLinkedList();
-list.push(0);
-list.push(1);
-list.push(2);
-list.push(3);
-list.push(5);
-list.push(6);
-
-console.log(list.insert(0, "new"));
-console.log(list);
